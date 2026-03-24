@@ -2968,6 +2968,751 @@ self.addEventListener('activate', event => {
       }
     }
 
+    /* Figma-inspired Design Elements */
+    .figma-shape {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.6;
+      mix-blend-mode: screen;
+    }
+
+    .figma-circle {
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      filter: blur(40px);
+      animation: figmaFloat 8s ease-in-out infinite;
+    }
+
+    .figma-rectangle {
+      background: linear-gradient(45deg, var(--accent), var(--primary));
+      border-radius: 24px;
+      transform: rotate(45deg);
+      filter: blur(30px);
+      animation: figmaRotate 12s linear infinite;
+    }
+
+    .figma-donut {
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+      filter: blur(25px);
+      animation: figmaRotate 10s linear infinite reverse;
+    }
+
+    .figma-polygon {
+      background: linear-gradient(135deg, var(--secondary), var(--accent));
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      filter: blur(35px);
+      animation: figmaFloat 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes figmaFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-20px) scale(1.1); }
+    }
+
+    @keyframes figmaRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Figma-style Cards */
+    .figma-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .figma-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      animation: figmaShimmer 3s infinite;
+    }
+
+    @keyframes figmaShimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .figma-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--primary);
+      box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Figma-style Buttons */
+    .figma-button {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .figma-button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .figma-button:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .figma-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+    }
+
+    /* Figma-style Input Fields */
+    .figma-input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .figma-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+    }
+
+    /* Figma-style Navigation Dots */
+    .figma-nav-dots {
+      display: flex;
+      gap: 8px;
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+    }
+
+    .figma-nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .figma-nav-dot::before {
+      content: attr(data-section);
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .figma-nav-dot:hover::before {
+      opacity: 1;
+    }
+
+    .figma-nav-dot.active {
+      background: var(--primary);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Figma-style Progress Indicators */
+    .figma-progress {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .figma-progress-bar {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .figma-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+      animation: figmaProgress 2s ease-in-out;
+    }
+
+    @keyframes figmaProgress {
+      0% { width: 0%; }
+      100% { width: var(--progress, 100%); }
+    }
+
+    /* Figma-style Tooltips */
+    .figma-tooltip {
+      position: relative;
+    }
+
+    .figma-tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      margin-bottom: 8px;
+    }
+
+    .figma-tooltip:hover::after {
+      opacity: 1;
+    }
+
+    /* Figma-style Floating Action Button */
+    .figma-fab {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .figma-fab:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 32px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Figma-style Tags */
+    .figma-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--primary);
+      transition: all 0.3s;
+    }
+
+    .figma-tag:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .figma-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: figmaPulse 2s infinite;
+    }
+
+    @keyframes figmaPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Figma-style Divider */
+    .figma-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      margin: 40px 0;
+      position: relative;
+    }
+
+    .figma-divider::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    /* Figma-style Skeleton Loader */
+    .figma-skeleton {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      background-size: 200% 100%;
+      animation: figmaSkeleton 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes figmaSkeleton {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Figma-style Avatars */
+    .figma-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .figma-avatar::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      animation: figmaShimmer 3s infinite;
+    }
+
+    /* Figma-style Status Indicators */
+    .figma-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .figma-status.online {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+
+    .figma-status.offline {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    .figma-status.busy {
+      background: rgba(251, 191, 36, 0.1);
+      color: #fbbf24;
+    }
+
+    .figma-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: figmaPulse 2s infinite;
+    }
+
+    /* Figma-style Toggle Switch */
+    .figma-toggle {
+      position: relative;
+      width: 48px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .figma-toggle.active {
+      background: var(--primary);
+    }
+
+    .figma-toggle::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .figma-toggle.active::before {
+      transform: translateX(24px);
+    }
+
+    /* Figma-style Modal Backdrop */
+    .figma-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .figma-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Figma-style Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(56, 189, 248, 0.3);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(56, 189, 248, 0.5);
+    }
+
+    /* Figma-style Selection */
+    ::selection {
+      background: rgba(56, 189, 248, 0.3);
+      color: white;
+    }
+
+    /* Figma-style Focus Rings */
+    .figma-focus:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    /* Figma-style Grid Pattern */
+    .figma-grid-pattern {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.1;
+      overflow: hidden;
+    }
+
+    .figma-grid-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      animation: figmaGridPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes figmaGridPulse {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Figma-style Floating Badges */
+    .figma-floating-badge {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+      pointer-events: none;
+      animation: figmaBadgeFloat 6s ease-in-out infinite;
+      z-index: 5;
+    }
+
+    .figma-floating-badge i {
+      font-size: 14px;
+      color: var(--primary);
+    }
+
+    .figma-floating-badge:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .figma-floating-badge:nth-child(2) {
+      animation-delay: 2s;
+    }
+
+    .figma-floating-badge:nth-child(3) {
+      animation-delay: 4s;
+    }
+
+    @keyframes figmaBadgeFloat {
+      0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.7;
+      }
+      25% { 
+        transform: translateY(-10px) rotate(1deg);
+        opacity: 0.9;
+      }
+      50% { 
+        transform: translateY(0) rotate(-1deg);
+        opacity: 0.8;
+      }
+      75% { 
+        transform: translateY(-5px) rotate(0.5deg);
+        opacity: 0.9;
+      }
+    }
+
+    /* Figma-style Progress Bars */
+    .figma-progress-container {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .figma-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      border-radius: 2px;
+      width: 0%;
+      animation: figmaPageProgress 2s ease-out forwards;
+    }
+
+    @keyframes figmaPageProgress {
+      0% { width: 0%; }
+      100% { width: 75%; }
+    }
+
+    /* Figma-style Corner Elements */
+    .figma-corner {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      pointer-events: none;
+    }
+
+    .figma-corner.top-left {
+      top: 0;
+      left: 0;
+      border-top: 2px solid var(--primary);
+      border-left: 2px solid var(--primary);
+      border-radius: 20px 0 0 0;
+    }
+
+    .figma-corner.top-right {
+      top: 0;
+      right: 0;
+      border-top: 2px solid var(--secondary);
+      border-right: 2px solid var(--secondary);
+      border-radius: 0 20px 0 0;
+    }
+
+    .figma-corner.bottom-left {
+      bottom: 0;
+      left: 0;
+      border-bottom: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+      border-radius: 0 0 0 20px;
+    }
+
+    .figma-corner.bottom-right {
+      bottom: 0;
+      right: 0;
+      border-bottom: 2px solid var(--primary);
+      border-right: 2px solid var(--primary);
+      border-radius: 0 0 20px 0;
+    }
+
+    /* Figma-style Animated Background */
+    .figma-animated-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(129, 140, 248, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(244, 114, 182, 0.1) 0%, transparent 50%);
+      animation: figmaBgShift 10s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes figmaBgShift {
+      0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+      }
+      33% { 
+        transform: translate(-20px, -20px) scale(1.1);
+        opacity: 0.5;
+      }
+      66% { 
+        transform: translate(20px, -10px) scale(0.9);
+        opacity: 0.4;
+      }
+    }
+
+    /* Figma-style Particle System */
+    .figma-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: figmaParticleFloat 8s linear infinite;
+    }
+
+    @keyframes figmaParticleFloat {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+        transform: translateY(90vh) translateX(-10px) scale(1);
+      }
+      90% {
+        opacity: 1;
+        transform: translateY(10vh) translateX(10px) scale(1);
+      }
+      100% {
+        transform: translateY(0) translateX(0) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Figma-style Connection Lines */
+    .figma-connection {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      transform-origin: left center;
+      animation: figmaConnectionPulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes figmaConnectionPulse {
+      0%, 100% { 
+        opacity: 0.2;
+        transform: scaleX(0.8);
+      }
+      50% { 
+        opacity: 0.6;
+        transform: scaleX(1);
+      }
+    }
+
+    /* Figma-style Loading Dots */
+    .figma-loading-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .figma-loading-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: figmaLoadingBounce 1.4s ease-in-out infinite;
+    }
+
+    .figma-loading-dot:nth-child(1) { animation-delay: 0s; }
+    .figma-loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .figma-loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes figmaLoadingBounce {
+      0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+      }
+      40% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* Figma-style Selection Box */
+    .figma-selection {
+      position: absolute;
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      pointer-events: none;
+      animation: figmaSelectionPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes figmaSelectionPulse {
+      0%, 100% {
+        border-color: var(--primary);
+        background: rgba(56, 189, 248, 0.1);
+      }
+      50% {
+        border-color: var(--secondary);
+        background: rgba(129, 140, 248, 0.1);
+      }
+    }
+
     /* High contrast mode */
     @media (prefers-contrast: high) {
       :root {
@@ -3034,6 +3779,15 @@ self.addEventListener('activate', event => {
   </nav>
   <div class="nav-overlay" aria-hidden="true"></div>
   
+  <!-- Figma-style Navigation Dots -->
+  <div class="figma-nav-dots">
+    <div class="figma-nav-dot active" data-section="About" onclick="scrollToSection('about')"></div>
+    <div class="figma-nav-dot" data-section="Experience" onclick="scrollToSection('experience')"></div>
+    <div class="figma-nav-dot" data-section="Projects" onclick="scrollToSection('projects')"></div>
+    <div class="figma-nav-dot" data-section="Skills" onclick="scrollToSection('skills')"></div>
+    <div class="figma-nav-dot" data-section="Contact" onclick="scrollToSection('contact')"></div>
+  </div>
+  
   <main id="main-content">
     <section class="hero" aria-label="Introduction">
       <div class="hero-bg" aria-hidden="true">
@@ -3055,20 +3809,58 @@ self.addEventListener('activate', event => {
           <div class="floating-dot" style="--i: 7"></div>
           <div class="floating-dot" style="--i: 8"></div>
         </div>
+        
+        <!-- Figma-inspired geometric shapes -->
+        <div class="figma-shape figma-circle" style="width: 200px; height: 200px; top: 5%; left: 10%;"></div>
+        <div class="figma-shape figma-rectangle" style="width: 120px; height: 120px; top: 60%; right: 15%;"></div>
+        <div class="figma-shape figma-donut" style="width: 150px; height: 150px; bottom: 20%; left: 20%;"></div>
+        <div class="figma-shape figma-polygon" style="width: 100px; height: 100px; top: 30%; right: 25%;"></div>
+        
+        <!-- Additional Figma shapes -->
+        <div class="figma-shape figma-circle" style="width: 80px; height: 80px; top: 15%; right: 40%; animation-delay: 2s;"></div>
+        <div class="figma-shape figma-rectangle" style="width: 60px; height: 60px; bottom: 35%; right: 8%; animation-delay: 1s;"></div>
+        <div class="figma-shape figma-donut" style="width: 90px; height: 90px; top: 45%; left: 5%; animation-delay: 3s;"></div>
+        <div class="figma-shape figma-polygon" style="width: 70px; height: 70px; bottom: 10%; right: 35%; animation-delay: 4s;"></div>
+        
+        <!-- Figma-style grid pattern -->
+        <div class="figma-grid-pattern">
+          <div class="figma-grid-line" style="top: 20%; left: 0; width: 100%; height: 1px;"></div>
+          <div class="figma-grid-line" style="top: 40%; left: 0; width: 100%; height: 1px;"></div>
+          <div class="figma-grid-line" style="top: 60%; left: 0; width: 100%; height: 1px;"></div>
+          <div class="figma-grid-line" style="top: 80%; left: 0; width: 100%; height: 1px;"></div>
+          <div class="figma-grid-line" style="top: 0; left: 25%; width: 1px; height: 100%;"></div>
+          <div class="figma-grid-line" style="top: 0; left: 50%; width: 1px; height: 100%;"></div>
+          <div class="figma-grid-line" style="top: 0; left: 75%; width: 1px; height: 100%;"></div>
+        </div>
+        
+        <!-- Figma-style floating badges -->
+        <div class="figma-floating-badge" style="top: 10%; right: 10%;">
+          <i class="fas fa-code"></i>
+          <span>Developer</span>
+        </div>
+        <div class="figma-floating-badge" style="top: 20%; left: 8%;">
+          <i class="fas fa-brain"></i>
+          <span>AI/ML</span>
+        </div>
+        <div class="figma-floating-badge" style="bottom: 15%; right: 12%;">
+          <i class="fas fa-database"></i>
+          <span>Data Science</span>
+        </div>
       </div>
       <div class="hero-content">
         <div class="hero-badge"><span></span> Available for work</div>
         <h1><span class="text-reveal">Python Developer</span><br><span class="hero-title-gradient text-reveal">Data Science Engineer</span><br><span class="text-reveal">Web App Specialist</span></h1>
         <p class="hero-subtitle">Building intelligent solutions with code and data. Transforming complex problems into elegant, efficient applications.</p>
         <div class="hero-cta">
-          <a href="#projects" class="primary-btn glow-effect magnetic">View My Work</a>
-          <a href="#contact" class="secondary-btn glow-effect">Contact Me</a>
+          <a href="#projects" class="figma-button glow-effect magnetic">View My Work</a>
+          <a href="#contact" class="secondary-btn glow-effect figma-button" style="background: transparent; border: 1px solid var(--border);">Contact Me</a>
         </div>
         <div class="hero-contact">
           <a href="tel:+919846508442"><i class="fas fa-phone" aria-hidden="true"></i> +91 9846508442</a>
           <a href="mailto:suhaaail777@outlook.com"><i class="fas fa-envelope" aria-hidden="true"></i> suhaaail777@outlook.com</a>
           <a href="https://wa.me/919846508442" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
           <a href="https://linkedin.com/in/suhaaail777" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+          
         </div>
       </div>
     </section>
@@ -3101,7 +3893,13 @@ self.addEventListener('activate', event => {
         </div>
         
         <div class="about-image parallax-slow">
-          <div class="about-image-placeholder">
+          <div class="about-image-placeholder figma-card">
+            <!-- Figma corner elements -->
+            <div class="figma-corner top-left"></div>
+            <div class="figma-corner top-right"></div>
+            <div class="figma-corner bottom-left"></div>
+            <div class="figma-corner bottom-right"></div>
+            
             <div class="about-icon">
               <i class="fas fa-code"></i>
             </div>
@@ -3109,10 +3907,17 @@ self.addEventListener('activate', event => {
               <span>Python Developer</span>
               <span>Data Science Engineer</span>
             </div>
+            
+            <!-- Figma progress bar -->
+            <div class="figma-progress-container">
+              <div class="figma-progress-fill"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="figma-divider"></div>
 
     <section id="experience" aria-labelledby="experience-title">
       <div class="section-header">
@@ -3120,11 +3925,12 @@ self.addEventListener('activate', event => {
         <h2 class="section-title" id="experience-title">Professional Journey</h2>
       </div>
 
-      <article class="experience-card card-3d glow-effect">
+      <article class="experience-card card-3d glow-effect figma-card">
         <div class="experience-header">
           <div>
             <h3>Freelance Python Developer</h3>
             <h4>Self-Employed</h4>
+            <span class="figma-tag" style="margin-top: 4px; display: inline-block;">Current</span>
           </div>
           <span class="experience-period">2024 - Present</span>
         </div>
@@ -3134,13 +3940,18 @@ self.addEventListener('activate', event => {
           <li>Created data visualization dashboards for business intelligence</li>
           <li>Optimized existing Python codebases for performance and scalability</li>
         </ul>
+        
+        <!-- Figma connection lines -->
+        <div class="figma-connection" style="top: 20px; left: 100px; width: 50px; transform: rotate(15deg);"></div>
+        <div class="figma-connection" style="bottom: 30px; right: 80px; width: 40px; transform: rotate(-25deg);"></div>
       </article>
 
-      <article class="experience-card card-3d glow-effect">
+      <article class="experience-card card-3d glow-effect figma-card">
         <div class="experience-header">
           <div>
             <h3>Data Science Intern</h3>
             <h4>Tech Solutions Inc.</h4>
+            <span class="figma-tag" style="margin-top: 4px; display: inline-block;">Completed</span>
           </div>
           <span class="experience-period">2024 - 2025</span>
         </div>
@@ -3150,13 +3961,18 @@ self.addEventListener('activate', event => {
           <li>Collaborated with senior engineers on model deployment pipelines</li>
           <li>Documented experiments and model performance metrics</li>
         </ul>
+        
+        <!-- Figma connection lines -->
+        <div class="figma-connection" style="top: 30px; left: 120px; width: 45px; transform: rotate(-10deg);"></div>
+        <div class="figma-connection" style="bottom: 40px; right: 100px; width: 35px; transform: rotate(20deg);"></div>
       </article>
 
-      <article class="experience-card card-3d glow-effect">
+      <article class="experience-card card-3d glow-effect figma-card">
         <div class="experience-header">
           <div>
             <h3>IT Support Specialist</h3>
             <h4>Edappal Hospital</h4>
+            <span class="figma-tag" style="margin-top: 4px; display: inline-block;">Current</span>
           </div>
           <span class="experience-period">2025 - Present</span>
         </div>
@@ -3166,6 +3982,10 @@ self.addEventListener('activate', event => {
           <li>Strengthened data protection aligned with healthcare standards</li>
           <li>Collaborated with medical teams to improve digital workflows</li>
         </ul>
+        
+        <!-- Figma connection lines -->
+        <div class="figma-connection" style="top: 25px; left: 110px; width: 40px; transform: rotate(5deg);"></div>
+        <div class="figma-connection" style="bottom: 35px; right: 90px; width: 45px; transform: rotate(-15deg);"></div>
       </article>
     </section>
 
@@ -3176,7 +3996,7 @@ self.addEventListener('activate', event => {
         <p class="section-subtitle">A collection of projects showcasing my skills in Python development, data science, and web applications.</p>
       </div>
       <div class="projects-grid">
-        <article class="project-card card-3d glow-effect" onclick="openModal('license')" tabindex="0" role="button" aria-label="View License Renewal Alert Platform details">
+        <article class="project-card card-3d glow-effect figma-card" onclick="openModal('license')" tabindex="0" role="button" aria-label="View License Renewal Alert Platform details">
           <div class="project-card-inner">
             
             <div class="project-image">
@@ -3190,15 +4010,15 @@ self.addEventListener('activate', event => {
               <h3 class="project-title">License Renewal Alert Platform</h3>
               <p class="project-desc">Automated compliance tracking system that reduced administrative workload by 70%.</p>
               <div class="project-tags">
-                <span class="project-tag">Python</span>
-                <span class="project-tag">Flask</span>
-                <span class="project-tag">SQL</span>
+                <span class="project-tag figma-tag">Python</span>
+                <span class="project-tag figma-tag">Flask</span>
+                <span class="project-tag figma-tag">SQL</span>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="project-card card-3d glow-effect" onclick="openModal('fuel')" tabindex="0" role="button" aria-label="View On-Demand Fuel Request App details">
+        <article class="project-card card-3d glow-effect figma-card" onclick="openModal('fuel')" tabindex="0" role="button" aria-label="View On-Demand Fuel Request App details">
           <div class="project-card-inner">
             
             <div class="project-image">
@@ -3212,15 +4032,15 @@ self.addEventListener('activate', event => {
               <h3 class="project-title">On-Demand Fuel Request App</h3>
               <p class="project-desc">Real-time emergency fuel request platform with scalable backend.</p>
               <div class="project-tags">
-                <span class="project-tag">Python</span>
-                <span class="project-tag">Flask</span>
-                <span class="project-tag">JavaScript</span>
+                <span class="project-tag figma-tag">Python</span>
+                <span class="project-tag figma-tag">Flask</span>
+                <span class="project-tag figma-tag">JavaScript</span>
               </div>
             </div>
           </div>
         </article>
 
-        <article class="project-card card-3d glow-effect" onclick="openModal('ai')" tabindex="0" role="button" aria-label="View AI Skin Disease Detection details">
+        <article class="project-card card-3d glow-effect figma-card" onclick="openModal('ai')" tabindex="0" role="button" aria-label="View AI Skin Disease Detection details">
           <div class="project-card-inner">
             
             <div class="project-image">
@@ -3234,9 +4054,9 @@ self.addEventListener('activate', event => {
               <h3 class="project-title">AI Skin Disease Detection</h3>
               <p class="project-desc">ML model supporting early-stage dermatological diagnostics.</p>
               <div class="project-tags">
-                <span class="project-tag">Python</span>
-                <span class="project-tag">TensorFlow</span>
-                <span class="project-tag">Data Science</span>
+                <span class="project-tag figma-tag">Python</span>
+                <span class="project-tag figma-tag">TensorFlow</span>
+                <span class="project-tag figma-tag">Data Science</span>
               </div>
             </div>
           </div>
@@ -3251,57 +4071,81 @@ self.addEventListener('activate', event => {
         <p class="section-subtitle">Technologies and tools I use to bring ideas to life.</p>
       </div>
       <div class="skills-grid">
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('python')" tabindex="0" role="button" aria-label="View Python skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('python')" tabindex="0" role="button" aria-label="View Python skill details">
           <div class="skill-icon"><i class="fab fa-python" aria-hidden="true"></i></div>
           <h4>Python</h4>
           <p>Backend development, automation, data processing</p>
+          
+          <!-- Figma progress indicator -->
+          <div class="figma-progress" style="margin-top: 12px;">
+            <div class="figma-progress-bar" style="flex: 1;">
+              <div class="figma-progress-fill" style="--progress: 95%;"></div>
+            </div>
+            <span style="font-size: 11px; color: var(--primary); margin-left: 8px;">95%</span>
+          </div>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('flask')" tabindex="0" role="button" aria-label="View Flask skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('flask')" tabindex="0" role="button" aria-label="View Flask skill details">
           <div class="skill-icon"><i class="fas fa-flask" aria-hidden="true"></i></div>
           <h4>Flask</h4>
           <p>Scalable web architecture, REST APIs</p>
+          
+          <!-- Figma progress indicator -->
+          <div class="figma-progress" style="margin-top: 12px;">
+            <div class="figma-progress-bar" style="flex: 1;">
+              <div class="figma-progress-fill" style="--progress: 90%;"></div>
+            </div>
+            <span style="font-size: 11px; color: var(--primary); margin-left: 8px;">90%</span>
+          </div>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('machine-learning')" tabindex="0" role="button" aria-label="View Machine Learning skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('machine-learning')" tabindex="0" role="button" aria-label="View Machine Learning skill details">
           <div class="skill-icon"><i class="fas fa-brain" aria-hidden="true"></i></div>
           <h4>Machine Learning</h4>
           <p>Model building, evaluation, deployment</p>
+          
+          <!-- Figma progress indicator -->
+          <div class="figma-progress" style="margin-top: 12px;">
+            <div class="figma-progress-bar" style="flex: 1;">
+              <div class="figma-progress-fill" style="--progress: 85%;"></div>
+            </div>
+            <span style="font-size: 11px; color: var(--primary); margin-left: 8px;">85%</span>
+          </div>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('sql')" tabindex="0" role="button" aria-label="View SQL skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('sql')" tabindex="0" role="button" aria-label="View SQL skill details">
           <div class="skill-icon"><i class="fas fa-database" aria-hidden="true"></i></div>
           <h4>SQL</h4>
           <p>Database design, query optimization</p>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('api')" tabindex="0" role="button" aria-label="View REST APIs skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('api')" tabindex="0" role="button" aria-label="View REST APIs skill details">
           <div class="skill-icon"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
           <h4>REST APIs</h4>
           <p>Secure integrations, authentication</p>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('pandas')" tabindex="0" role="button" aria-label="View Pandas skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('pandas')" tabindex="0" role="button" aria-label="View Pandas skill details">
           <div class="skill-icon"><i class="fas fa-table" aria-hidden="true"></i></div>
           <h4>Pandas</h4>
           <p>Data manipulation, analysis</p>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('javascript')" tabindex="0" role="button" aria-label="View JavaScript skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('javascript')" tabindex="0" role="button" aria-label="View JavaScript skill details">
           <div class="skill-icon"><i class="fab fa-js" aria-hidden="true"></i></div>
           <h4>JavaScript</h4>
           <p>Frontend interactivity, dynamic web apps</p>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('html-css')" tabindex="0" role="button" aria-label="View HTML/CSS skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('html-css')" tabindex="0" role="button" aria-label="View HTML/CSS skill details">
           <div class="skill-icon"><i class="fab fa-html5" aria-hidden="true"></i></div>
           <h4>HTML/CSS</h4>
           <p>Responsive design, modern layouts</p>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('django')" tabindex="0" role="button" aria-label="View Django skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('django')" tabindex="0" role="button" aria-label="View Django skill details">
           <div class="skill-icon"><i class="fas fa-cube" aria-hidden="true"></i></div>
           <h4>Django</h4>
           <p>Full-stack framework, rapid development</p>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('fastapi')" tabindex="0" role="button" aria-label="View FastAPI skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('fastapi')" tabindex="0" role="button" aria-label="View FastAPI skill details">
           <div class="skill-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div>
           <h4>FastAPI</h4>
           <p>High-performance APIs, async support</p>
         </article>
-        <article class="skill-card card-3d glow-effect" onclick="openSkillModal('requests')" tabindex="0" role="button" aria-label="View Requests skill details">
+        <article class="skill-card card-3d glow-effect figma-card" onclick="openSkillModal('requests')" tabindex="0" role="button" aria-label="View Requests skill details">
           <div class="skill-icon"><i class="fas fa-globe" aria-hidden="true"></i></div>
           <h4>Requests</h4>
           <p>HTTP library, API integration</p>
@@ -3350,24 +4194,24 @@ self.addEventListener('activate', event => {
             </div>
           </div>
         </div>
-        <div class="contact-form glow-effect">
+        <div class="contact-form glow-effect figma-card">
           <form id="contactForm" action="https://formspree.io/f/mqedqapy" method="POST">
             <div class="form-group">
-              <input type="text" id="name" name="name" placeholder=" " required aria-label="Your Name">
+              <input type="text" id="name" name="name" placeholder=" " required aria-label="Your Name" class="figma-input figma-focus">
               <label for="name">Your Name</label>
               <span class="error-message">Please enter your name</span>
             </div>
             <div class="form-group">
-              <input type="email" id="email" name="email" placeholder=" " required aria-label="Your Email">
+              <input type="email" id="email" name="email" placeholder=" " required aria-label="Your Email" class="figma-input figma-focus">
               <label for="email">Your Email</label>
               <span class="error-message">Please enter a valid email</span>
             </div>
             <div class="form-group">
-              <textarea id="message" name="message" placeholder=" " required aria-label="Your Message"></textarea>
+              <textarea id="message" name="message" placeholder=" " required aria-label="Your Message" class="figma-input figma-focus"></textarea>
               <label for="message">Your Message</label>
               <span class="error-message">Please enter your message</span>
             </div>
-            <button type="submit" class="submit-btn glow-effect magnetic">Send Message</button>
+            <button type="submit" class="submit-btn glow-effect magnetic figma-button">Send Message</button>
             <div class="form-status" id="formStatus"></div>
           </form>
         </div>
@@ -3416,6 +4260,11 @@ self.addEventListener('activate', event => {
       </div>
     </div>
   </div>
+
+  <!-- Figma-style Floating Action Button -->
+  <button class="figma-fab figma-tooltip" data-tooltip="Back to top" onclick="scrollToTop()" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <footer role="contentinfo">
     <div class="footer-content">
@@ -3500,6 +4349,124 @@ self.addEventListener('activate', event => {
       });
     }
     animateTextReveal();
+
+    // Initialize Figma Elements
+    createFigmaParticles();
+
+    // Add Figma selection effect to cards on click
+    document.querySelectorAll('.figma-card').forEach(card => {
+      card.addEventListener('click', function() {
+        addFigmaSelection(this);
+      });
+    });
+
+    // Figma Navigation Dots Functionality
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        updateActiveNavDot(sectionId);
+      }
+    }
+
+    function updateActiveNavDot(sectionId) {
+      const dots = document.querySelectorAll('.figma-nav-dot');
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      const sectionMap = {
+        'about': 0,
+        'experience': 1,
+        'projects': 2,
+        'skills': 3,
+        'contact': 4
+      };
+      
+      const activeIndex = sectionMap[sectionId];
+      if (activeIndex !== undefined && dots[activeIndex]) {
+        dots[activeIndex].classList.add('active');
+      }
+    }
+
+    // Update active nav dot on scroll
+    window.addEventListener('scroll', function() {
+      const sections = ['about', 'experience', 'projects', 'skills', 'contact'];
+      const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          updateActiveNavDot(sections[i]);
+          break;
+        }
+      }
+    });
+
+    // Scroll to top function for FAB
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Show/hide FAB based on scroll position
+    window.addEventListener('scroll', function() {
+      const fab = document.querySelector('.figma-fab');
+      if (fab) {
+        if (window.pageYOffset > 300) {
+          fab.style.opacity = '1';
+          fab.style.visibility = 'visible';
+        } else {
+          fab.style.opacity = '0';
+          fab.style.visibility = 'hidden';
+        }
+      }
+    });
+
+    // Figma-style Particle System
+    function createFigmaParticles() {
+      const heroSection = document.querySelector('.hero-bg');
+      if (!heroSection) return;
+
+      // Create floating particles
+      for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'figma-particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (8 + Math.random() * 4) + 's';
+        heroSection.appendChild(particle);
+      }
+    }
+
+    // Figma-style Loading Animation
+    function showFigmaLoading(element) {
+      const loadingDots = document.createElement('div');
+      loadingDots.className = 'figma-loading-dots';
+      loadingDots.innerHTML = `
+        <div class="figma-loading-dot"></div>
+        <div class="figma-loading-dot"></div>
+        <div class="figma-loading-dot"></div>
+      `;
+      
+      element.appendChild(loadingDots);
+      return loadingDots;
+    }
+
+    // Figma-style Selection Effect
+    function addFigmaSelection(element) {
+      const selection = document.createElement('div');
+      selection.className = 'figma-selection';
+      
+      const rect = element.getBoundingClientRect();
+      selection.style.top = rect.top - 4 + 'px';
+      selection.style.left = rect.left - 4 + 'px';
+      selection.style.width = rect.width + 8 + 'px';
+      selection.style.height = rect.height + 8 + 'px';
+      
+      document.body.appendChild(selection);
+      
+      setTimeout(() => {
+        selection.remove();
+      }, 2000);
+    }
 
     // Enhanced Card 3D Effect
     document.querySelectorAll('.card-3d').forEach(card => {
