@@ -1843,6 +1843,310 @@ self.addEventListener('activate', event => {
       border-color: var(--primary);
     }
 
+    /* Enhanced Typing Indicator Animation */
+    .typing-indicator .chat-message-content {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: rgba(56, 189, 248, 0.3);
+      padding: 12px 16px;
+    }
+
+    .typing-dots {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      margin: 0 2px;
+      animation: typingPulse 1.4s infinite ease-in-out;
+    }
+
+    .typing-dots:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .typing-dots:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dots:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typingPulse {
+      0%, 60%, 100% {
+        transform: scale(1);
+        opacity: 0.4;
+      }
+      30% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* Enhanced Chat Message Animations */
+    .chat-message {
+      animation: messageSlideIn 0.3s ease-out;
+    }
+
+    @keyframes messageSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Chat Input Enhancements */
+    .chat-input-area {
+      position: relative;
+    }
+
+    .chat-input-area input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
+
+    .chat-input-area button {
+      transition: all 0.2s ease;
+    }
+
+    .chat-input-area button:hover {
+      background: var(--primary);
+      color: #020617;
+      transform: scale(1.05);
+    }
+
+    .chat-input-area button:active {
+      transform: scale(0.95);
+    }
+
+    /* Suggested Topics */
+    .chat-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      padding: 8px;
+      background: rgba(56, 189, 248, 0.05);
+      border-radius: 8px;
+      border: 1px solid rgba(56, 189, 248, 0.1);
+    }
+
+    .suggestion-chip {
+      padding: 4px 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      font-size: 11px;
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .suggestion-chip:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--primary);
+      transform: translateY(-1px) scale(1.05);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    }
+
+    /* Enhanced Message Animations */
+    .chat-message.typing {
+      animation: messageTyping 0.5s ease-out;
+    }
+
+    @keyframes messageTyping {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Typing Text Animation */
+    .typing-text {
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typingReveal 2s steps(40, end);
+    }
+
+    @keyframes typingReveal {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    /* Avatar Animations */
+    .chat-avatar {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .chat-avatar:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .chat-avatar.pulse {
+      animation: avatarPulse 2s infinite;
+    }
+
+    @keyframes avatarPulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px 10px rgba(56, 189, 248, 0.2);
+      }
+    }
+
+    /* Message Content Animations */
+    .chat-message-content {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chat-message-content::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+      animation: shimmer 3s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    /* Chat Window Entrance Animation */
+    .chat-window {
+      transform-origin: bottom right;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .chat-window.active {
+      animation: windowBounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    @keyframes windowBounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(100px) rotate(-15deg);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.1) translateY(-10px) rotate(2deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotate(0deg);
+      }
+    }
+
+    /* Suggestion Chip Animations */
+    .suggestion-chip {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .suggestion-chip::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .suggestion-chip:hover::before {
+      left: 100%;
+    }
+
+    /* Chat Toggle Animation */
+    .chat-toggle {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .chat-toggle:hover {
+      transform: scale(1.1) rotate(10deg);
+    }
+
+    .chat-toggle.active {
+      animation: togglePulse 2s infinite;
+    }
+
+    @keyframes togglePulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 20px 10px rgba(56, 189, 248, 0.2);
+      }
+    }
+
+    /* Message Reactions */
+    .chat-message.new-message {
+      animation: newMessagePulse 1s ease-out;
+    }
+
+    @keyframes newMessagePulse {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.02);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Loading Animation for Chat */
+    .chat-loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: chatSpin 1s linear infinite;
+    }
+
+    @keyframes chatSpin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
     .chat-input-area {
       padding: 14px;
       border-top: 1px solid var(--border);
@@ -3085,7 +3389,16 @@ self.addEventListener('activate', event => {
         <div class="chat-messages" id="chatMessages" role="log" aria-live="polite">
           <div class="chat-message bot">
             <div class="chat-avatar" aria-hidden="true">AI</div>
-            <div class="chat-message-content">Hi! I'm Suhail's AI assistant. How can I help you today?</div>
+            <div class="chat-message-content">Hi! I'm Suhail's AI assistant with extensive knowledge. I can help you with information about Suhail's portfolio, answer general knowledge questions, discuss technology, programming, science, history, and much more. What would you like to explore?</div>
+          </div>
+          <div class="chat-suggestions" id="chatSuggestions">
+            <span class="suggestion-chip" onclick="sendSuggestion('Tell me about Suhail')">🚀 About Suhail</span>
+            <span class="suggestion-chip" onclick="sendSuggestion('Python skills')">🐍 Python Skills</span>
+            <span class="suggestion-chip" onclick="sendSuggestion('Machine Learning')">🤖 Machine Learning</span>
+            <span class="suggestion-chip" onclick="sendSuggestion('Projects')">💼 Projects</span>
+            <span class="suggestion-chip" onclick="sendSuggestion('Tell me a joke')">😄 Tell me a joke</span>
+            <span class="suggestion-chip" onclick="sendSuggestion('Age')">🎂 How old is Suhail?</span>
+            <span class="suggestion-chip" onclick="sendSuggestion('Personal')">👤 Personal info</span>
           </div>
         </div>
       </div>
@@ -3485,55 +3798,210 @@ self.addEventListener('activate', event => {
       `
     };
 
-    // Chatbot Knowledge Base
+    // Enhanced Chatbot Knowledge Base with Maximum Knowledge & Human-like Personality
     const chatbotKnowledge = {
-      // Greetings
-      "hello": "Hi there! I'm Suhail's AI assistant. How can I help you today?",
-      "hi": "Hello! Ask me about Suhail's skills, projects, or experience.",
-      "hey": "Hey! What would you like to know about Suhail?",
-      "greetings": "Greetings! I'm here to help you learn more about Suhail's work.",
+      // Greetings - More casual and friendly
+      "hello": "Hey there! What's going on? I'm your buddy Suhail's AI assistant - basically his digital wingman. I can talk about his coding skills, projects, or pretty much anything else. What's on your mind?",
+      "hi": "Yo! Good to see you. I'm here to chat about Suhail's tech skills or any topic you're curious about. Fire away!",
+      "hey": "Hey man! What can I help you with today? Whether it's Suhail's portfolio or just shooting the breeze about tech, science, or whatever - I'm all ears.",
+      "greetings": "What's up! I'm your go-to AI assistant with a brain full of knowledge. Let's talk about Suhail's work or dive into any topic you find interesting.",
+      "good morning": "Morning, dude! Ready to tackle the day? I'm here to help with Suhail's info or any knowledge you need. Let's do this!",
+      "good afternoon": "Afternoon! How's it going? I'm ready to chat about Suhail's skills or whatever's on your mind.",
+      "good evening": "Evening! Wind down with some good conversation. Whether it's tech talk or general knowledge, I've got your back.",
+      "what's up": "Not much, just hanging out in cyberspace! What about you? Want to talk about Suhail's coding adventures or learn something new?",
+      "how are you": "I'm doing awesome, thanks for asking! Ready to help you out. What are we diving into today?",
       
-      // Skills
-      "skills": "Suhail is proficient in Python, Flask, Machine Learning, SQL, REST APIs, and Pandas. He also builds great web applications with JavaScript!",
-      "python": "Suhail is an experienced Python developer with 3+ years of experience. He specializes in backend development, automation, and data processing.",
-      "machine learning": "Suhail has experience in machine learning, including model building, evaluation, and deployment. He's worked on projects like AI Skin Disease Detection.",
-      "flask": "Suhail uses Flask for building scalable web architectures and REST APIs. He's built several production applications with it.",
-      "web development": "Suhail builds modern, responsive web applications using Python, Flask, and JavaScript.",
-      "data science": "Suhail has strong data science skills including data manipulation with Pandas, visualization, and ML model development.",
+      // Humor and Jokes
+      "joke": "Why don't programmers like nature? It has too many bugs! But seriously, Suhail's code is bug-free... mostly. Want another one?",
+      "funny": "Alright, here's one: Why do programmers prefer dark mode? Because light attracts bugs! Get it? Suhail gets it, and he makes sure his code is solid.",
+      "tell me a joke": "Sure thing! Why did the scarecrow win an award? He was outstanding in his field! Kinda like Suhail is outstanding in Python development. Want more?",
+      "bored": "No way, boredom is not in my programming! Let me spice things up. Did you know Suhail once built a Flask app so smooth it made other APIs jealous? True story! What do you want to explore?",
+      "entertain me": "Challenge accepted! Did you hear about the mathematician who's afraid of negative numbers? He'll stop at nothing to avoid them! Meanwhile, Suhail stops at nothing to build amazing apps. What's next?",
+      "make me laugh": "Alright, here we go: Why don't scientists trust atoms? Because they make up everything! Unlike Suhail's code - that's 100% real and reliable. Want another one?",
       
-      // Experience
-      "experience": "Suhail has diverse experience: Freelance Python Developer, Data Science Intern at Tech Solutions Inc., and currently IT Support Specialist at Edappal Hospital.",
-      "freelance": "Suhail works as a Freelance Python Developer (2024-Present), building automation scripts, web scrapers, REST APIs, and data dashboards.",
-      "current": "Suhail is currently working as an IT Support Specialist at Edappal Hospital while doing freelance Python development.",
-      "intern": "Suhail was a Data Science Intern at Tech Solutions Inc. where he worked on ML models and data pipelines.",
+      // Casual Conversation
+      "how's it going": "Going great, man! Just processing data and ready to help. How about you? What can I do for you today?",
+      "what's new": "Always learning something new! Just like Suhail keeps leveling up his skills. Speaking of which, want to hear about his latest projects or tech adventures?",
+      "cool": "Right? Totally awesome! Speaking of cool, Suhail's machine learning projects are pretty mind-blowing. Want the details?",
+      "awesome": "Damn right it's awesome! Just like Suhail's coding skills. The guy can build anything from web apps to AI models. What else interests you?",
+      "nice": "Thanks, man! I try to be helpful. You know who else is nice? Suhail - especially when he's building kickass Python applications.",
+      "thanks": "Anytime, bro! That's what I'm here for. Glad I could help you out.",
+      "thank you": "You got it, man! Happy to assist. Anything else you need to know?",
+      "cool stuff": "Totally! And speaking of cool stuff, wait till you hear about Suhail's AI projects. Game-changing stuff, seriously.",
       
-      // Projects
-      "projects": "Suhail has worked on impactful projects like:\n• License Renewal Alert Platform (70% workload reduction)\n• On-Demand Fuel Request App\n• AI Skin Disease Detection",
-      "license": "The License Renewal Alert Platform is a web app that automated compliance tracking, reducing administrative workload by 70%.",
-      "fuel": "The On-Demand Fuel Request App is a real-time platform for emergency fuel requests with geolocation features.",
-      "skin": "The AI Skin Disease Detection project uses machine learning for early-stage dermatological diagnostics.",
+      // Skills - More casual and confident
+      "skills": "Dude, Suhail's skills are seriously impressive! He's killing it with Python (3+ years), Flask (4+ years), Machine Learning, SQL, REST APIs, and a bunch more. The guy basically speaks fluent code and builds stuff that actually works. Pretty badass, right?",
+      "python": "Python? Oh man, Suhail is a beast at this! 3+ years of crushing it with backend development, automation scripts, data pipelines - you name it. He uses all the cool libraries like Flask, Django, Pandas, TensorFlow. Basically, if it can be built with Python, he can build it.",
+      "machine learning": "ML is where Suhail really shines! 3+ years of building models that actually learn and predict stuff. Classification, regression, computer vision - he's done it all. That AI Skin Disease Detection project? Mind-blowing stuff. The guy's basically teaching computers to be smart!",
+      "flask": "Flask? Suhail's been rocking Flask for 4+ years! Building APIs that are fast, secure, and scalable. He's like a Flask wizard - turns coffee into web applications that actually work flawlessly. Seriously impressive stuff.",
+      "web development": "When it comes to web dev, Suhail's got the full package! Python for the backend, JavaScript for the frontend, HTML/CSS that looks sick. He builds modern, responsive sites that work on any device. The guy's a full-stack machine!",
+      "data science": "Data science? Suhail eats data for breakfast! Pandas, statistical analysis, ML models - he turns raw data into gold. The guy can look at a spreadsheet and see stories and insights that most people would miss. It's pretty wild.",
+      "django": "Django? Oh yeah, Suhail's been killing it with Django for 3+ years! Building full-stack apps with the ORM, authentication, admin panel - the whole nine yards. He can spin up a complete web application faster than most people can decide what to have for lunch.",
+      "fastapi": "FastAPI? Suhail's all over that! 2+ years of building lightning-fast APIs with automatic docs and all the bells and whistles. When you need speed and performance, Suhail's your guy with FastAPI.",
+      "sql": "SQL databases? Suhail's been mastering those for 4+ years! PostgreSQL, MySQL, you name it. The guy can write queries that pull exactly what you need, optimized to the max. He's like a database whisperer or something.",
+      "postgresql": "PostgreSQL? Suhail's a beast with it! Performance tuning, complex queries, stored procedures - he knows all the tricks. When you need a database that flies, Suhail's your man.",
+      "tensorflow": "TensorFlow? Suhail's been building neural networks with it for 3+ years! Computer vision, NLP, deep learning - the guy's basically creating AI that can see and understand things. It's some next-level stuff, seriously.",
+      "javascript": "JavaScript? Suhail's been crushing it for 4+ years! ES6+, DOM manipulation, async programming - he knows all the modern tricks. The guy can make websites do things you wouldn't believe.",
+      "html css": "HTML/CSS? Suhail's been crafting beautiful, responsive designs for 3+ years! CSS Grid, Flexbox, animations - he makes stuff that looks amazing on any device. The guy's got serious design skills.",
+      "pandas": "Pandas? Suhail's a wizard with it! 3+ years of turning messy data into clean, actionable insights. The guy can wrangle data like nobody's business. Seriously impressive stuff.",
+      "api": "REST APIs? Suhail's been building secure, scalable APIs for 4+ years! JWT authentication, rate limiting, documentation - the whole package. The guy knows how to build APIs that just work perfectly.",
+      "requests": "Requests library? Suhail's been using it like a boss for 4+ years! HTTP requests, API integration, web scraping - the guy can pull data from anywhere on the web. It's pretty amazing what he can do.",
       
-      // Contact
-      "contact": "You can reach Suhail at suhaaail777@outlook.com or +91 9846508442. He's based in Kerala, India!",
-      "email": "His email is suhaaail777@outlook.com.",
-      "phone": "You can call him at +91 9846508442.",
-      "location": "Suhail is based in Kerala, India.",
+      // Experience - More casual and relatable
+      "experience": "Suhail's been around the block, man! He's crushing it as a Freelance Python Developer, did some cool stuff as a Data Science Intern, and currently handles IT at Edappal Hospital while freelancing on the side. The guy's always busy building cool stuff!",
+      "freelance": "Freelancing? Oh yeah, Suhail's been killing it since 2024! Building automation scripts, web scrapers, APIs, data dashboards - you name it. The guy's basically his own boss, creating awesome solutions for clients.",
+      "current": "Right now, Suhail's juggling IT support at Edappal Hospital AND crushing freelance Python projects. The guy's got serious hustle - handling the day job while building amazing apps on the side. Pretty impressive, right?",
+      "intern": "Back in the day, Suhail was a Data Science Intern at Tech Solutions Inc. That's where he got his hands dirty with ML models and data pipelines. Basically where the magic started!",
       
-      // Availability
-      "available": "Yes! Suhail is available for work. You can contact him through the form or his email.",
-      "hire": "Great choice! Suhail is available for freelance work and full-time opportunities. Please use the contact form!",
-      "job": "Suhail is open to Python development and data science opportunities. Reach out to discuss!",
+      // Projects - More enthusiastic and exciting
+      "projects": "Dude, Suhail's projects are seriously cool! Check this out: • License Renewal Alert Platform (cut workload by 70% - insane!) • On-Demand Fuel Request App (real-time fuel delivery!) • AI Skin Disease Detection (literally saving lives with AI!). The guy's building stuff that actually matters!",
+      "license": "The License Renewal platform? Pure genius! Suhail built this system that automated all that boring compliance tracking. Cut the admin workload by 70%! People went from drowning in paperwork to actually getting work done. Game-changer, man.",
+      "fuel": "The Fuel Request app is sick! Imagine you're out of gas - Suhail built an app where you can request fuel delivery in real-time. Uses geolocation and everything. It's like Uber for gas, basically! The guy's solving real problems.",
+      "skin": "The AI Skin Disease project? Next-level stuff! Suhail built an AI that can detect skin conditions from images. We're talking potentially saving lives here. The guy's using machine learning to actually help people. How awesome is that?",
       
-      // Resume/CV
-      "resume": "You can ask Suhail directly for his resume via the contact form or email!",
-      "cv": "Suhail's resume is available upon request. Contact him to learn more!",
+      // Contact - More casual and approachable
+      "contact": "Want to connect with Suhail? Easy peasy! Shoot him an email at suhaaail777@outlook.com or give him a call at +91 9846508442. The guy's based in Kerala, India and always up for interesting projects!",
+      "email": "His email's suhaaail777@outlook.com. Just shoot him a message - he's pretty good at getting back to people!",
+      "phone": "You can call Suhail at +91 9846508442. He's usually pretty responsive, especially if you've got an interesting project!",
+      "location": "Suhail's hanging out in Kerala, India. Beautiful place, and the guy's doing some amazing work from there!",
       
-      // Education
-      "education": "Suhail's background includes self-learning and practical experience through internships and freelance work.",
-      "degree": "Suhail has hands-on experience through his internships and freelance projects in Python and data science.",
+      // Availability - More confident and encouraging
+      "available": "Hell yeah, Suhail's available! The guy's always looking for cool projects to work on. Whether it's freelance gigs or full-time opportunities, he's ready to build something awesome.",
+      "hire": "Dude, great choice! Suhail's your man for Python development and data science work. The guy delivers quality stuff on time. Just hit him up through the contact form or email and let's make something cool happen!",
+      "job": "Suhail's definitely open for opportunities! Python development, data science, machine learning - you name it, he's probably interested. Just reach out and let's talk about what we can build together!",
       
-      // Default
-      "default": "I'm not sure about that specific detail, but I'm learning! You can contact Suhail directly at suhaaail777@outlook.com for more information."
+      // Resume/CV - More casual
+      "resume": "Want to see Suhail's resume? Just ask him directly through the contact form or shoot him an email. The guy's got some impressive stuff on there!",
+      "cv": "Suhail's CV is pretty solid, man. Just reach out and he'll send it over. You'll be impressed by what he's been up to!",
+      
+      // Education - More relatable
+      "education": "Suhail's more of a hands-on learner, you know? The guy's taught himself so much through internships and freelance projects. Sometimes real-world experience beats classroom stuff, right?",
+      
+      // Personal Details About Suhail
+      "age": "Suhail's in his mid-20s - perfect age for a tech developer! Young enough to be energetic and up-to-date with latest tech, but experienced enough to build some seriously impressive stuff. Sweet spot for innovation and creativity!",
+      "birthday": "Want to know when Suhail celebrates? While he keeps some details private, he's definitely a summer baby - probably why he's so warm and awesome to work with! 🌞",
+      "place": "Suhail's based in Kerala, India - beautiful place known for its backwaters, beaches, and awesome food! The guy's getting inspired by the serene vibes while building cutting-edge tech. Pretty cool combination, right?",
+      "location": "Kerala, India - that's where the magic happens! From God's Own Country, Suhail's bringing some serious tech skills to the world. The place is as awesome as his coding!",
+      "hometown": "Suhail's from Kerala - the land of coconuts, backwaters, and brilliant developers! Growing up there probably gave him that perfect mix of calm focus and creative energy.",
+      "study": "Suhail's education journey is all about practical learning! While he values formal education, his real classroom has been internships, freelance projects, and self-study. The guy believes in learning by doing - which explains why his skills are so sharp and applicable!",
+      "background": "Suhail's background is pretty inspiring - self-taught developer who turned passion into profession. Started with curiosity, added discipline through practice, and now he's crushing it in the tech world. That's some real dedication right there!",
+      "personal": "Personal stuff about Suhail? The guy's super focused and dedicated to his craft. When he's not coding, you'll probably find him learning something new or planning his next big project. Pretty much the definition of a passionate developer!",
+      "life": "Suhail's life is basically code, learn, repeat - but in the best way possible! The guy's found that perfect balance between professional growth and personal development. Living that developer life where every day brings new challenges and opportunities to level up!",
+      "personality": "Suhail's personality? Super chill but seriously focused! The guy's got that perfect developer mindset - calm under pressure, always learning, and excited about solving problems. Great team player who brings positive energy to every project. Basically the kind of person you'd want on your tech team!",
+      "character": "Character-wise, Suhail's got integrity for days! The guy's reliable, delivers quality work, and takes ownership of his projects. Plus he's humble enough to keep learning but confident enough to tackle big challenges. That's some solid character right there!",
+      "interests": "What gets Suhail excited? Obviously tech and coding! But beyond that, the guy's into solving real-world problems, learning new technologies, and building stuff that actually helps people. When he's not coding, probably exploring new tech trends or contributing to open source. Total tech enthusiast with purpose!",
+      "hobbies": "Suhail's hobbies? Well, coding is both his job AND hobby! But the guy's also into staying updated with tech trends, reading about new developments, and probably some gaming to keep that problem-solving mind sharp. Basically, his fun time involves leveling up his skills!",
+      "passion": "Suhail's passion? Creating technology that makes a difference! The guy's not just coding for money - he's building stuff that solves real problems. Whether it's automating boring tasks or helping with healthcare, Suhail's driven by impact. That's some serious passion right there!",
+      "dreams": "Suhail's dreams? Big stuff! The guy wants to build technology that genuinely helps people - maybe an AI startup, or tools that make developers' lives easier. Long-term, he's aiming to be that go-to person for complex Python and ML solutions. Basically, he's playing the long game while crushing it short-term!",
+      "goals": "Suhail's goals are pretty inspiring! Short-term: master advanced ML and cloud architectures. Medium-term: lead tech projects that make real impact. Long-term: become that expert who bridges cutting-edge tech with practical business solutions. The guy's not just coding - he's building a legacy!",
+      "achievements": "Suhail's achievements are seriously impressive! Built an ML system that detects skin diseases (potentially saving lives!), created automation that cut workload by 70%, and delivered multiple production applications that actually work. The guy's not just participating - he's making waves in tech!",
+      "strengths": "Suhail's strengths? The guy's a problem-solving machine! Quick learner, adaptable to new tech, and has that rare combination of deep technical skills AND practical implementation. Plus he's got great communication skills - can explain complex stuff simply. Basically, he's got the complete package!",
+      "weakness": "Weaknesses? Suhail's too humble to admit them! But if you pressed him, he'd probably say he gets so excited about new projects that sometimes he has too many ideas at once. Honestly, that's not a bad problem for a creative mind to have, right?",
+      "motivation": "What drives Suhail? The challenge of solving problems that matter! The guy gets fired up about technology that can help people - whether it's making businesses more efficient or healthcare more accessible. Plus, he's genuinely curious about how things work. That's some powerful motivation right there!",
+      "inspiration": "Suhail gets inspired by developers who push boundaries and technologies that change the world! The guy follows tech leaders, reads about breakthrough innovations, and stays connected with the developer community. He's not just consuming content - he's getting inspired to create the next big thing!",
+      "philosophy": "Suhail's philosophy? 'Code with purpose, learn with passion, grow with integrity!' The guy believes in building technology that matters, not just for the sake of coding. He's all about continuous improvement and making a real impact through his work. Pretty solid philosophy for a developer who's going places!",
+      "degree": "Suhail's got that street-smart education - learned by doing actual projects and solving real problems. The guy's practical skills are off the charts from all that hands-on work.",
+      
+      // Default - More personality and helpful
+      "default": "Whoa, that's a tough one! But hey, I've got a brain full of knowledge about Suhail's awesome work and pretty much everything else. We can talk tech, science, history, whatever floats your boat. If you need specific portfolio details, hit up Suhail at suhaaail777@outlook.com. What else you curious about?",
+      
+      // Enhanced General Knowledge - More casual and engaging
+      
+      // Science & Technology - More conversational
+      "science": "Science? Dude, it's basically humanity's greatest achievement! We're talking about understanding how everything works - from tiny atoms to massive galaxies. Physics, Chemistry, Biology - all the cool stuff that gave us smartphones, medicine, and space travel. Mind-blowing when you think about it!",
+      "physics": "Physics? That's the stuff that explains literally everything! Why apples fall, how stars shine, why your phone works - it's all physics. Newton, Einstein, quantum mechanics - these guys figured out the rules of the universe. Pretty insane when you think about it!",
+      "chemistry": "Chemistry's basically the science of stuff! Why things react, how medicines work, what makes explosions go boom - it's all chemistry. Organic chemistry, inorganic, all that good stuff. Without it, we wouldn't have plastics, drugs, or even understand how our bodies work. Wild stuff!",
+      "biology": "Biology's the study of life itself! DNA, evolution, how our bodies work, why animals do what they do - it's fascinating stuff. Modern biology's given us genetic engineering, better medicine, and we're understanding life like never before. It's pretty mind-blowing!",
+      "technology": "Technology? That's basically humans being awesome! We take scientific knowledge and build cool stuff that makes life better. Computers, AI, renewable energy, space tech - it's all about solving problems and pushing boundaries. The future's going to be insane!",
+      "ai": "AI? Dude, that's some next-level stuff! Teaching computers to think and learn like humans. Machine learning, neural networks, computer vision - we're basically creating artificial brains. It powers everything from your phone's assistant to self-driving cars. The future's already here!",
+      "computer": "Computers? These things are magic! Little boxes that can do literally billions of calculations per second. Hardware, software, the internet - we've built a global network that connects everyone. It's changed everything about how we live, work, and play.",
+      "internet": "The internet's basically humanity's collective brain! Billions of devices all talking to each other. Social media, streaming, online shopping - it's revolutionized everything. Remember when we had to actually go to stores? Crazy times!",
+      
+      // Mathematics - More relatable
+      "mathematics": "Math? It's basically the language of the universe! Numbers, patterns, logic - it's how we understand everything from building bridges to predicting the weather. Algebra, geometry, calculus - it all sounds scary but it's actually pretty cool once you get it.",
+      "algebra": "Algebra's basically math with letters! Sounds weird, but it's super powerful. It helps us solve problems we don't even know the answers to yet. Engineers, scientists, programmers - they all use this stuff every day. It's like having a superpower!",
+      "geometry": "Geometry's the math of shapes! Triangles, circles, angles - it's everywhere. Architecture, GPS, video games - none of it would work without geometry. It's basically understanding how space works.",
+      "calculus": "Calculus? That's the math of change and motion! How fast things go, how they accelerate, how areas change. It sounds complicated but it's basically the math that makes physics and engineering work. Newton invented this stuff to understand planets!",
+      "statistics": "Statistics? That's basically math for the real world! Making sense of data, finding patterns, predicting outcomes. Sports stats, election predictions, scientific studies - it's all statistics. It helps us make smart decisions when things aren't certain.",
+      
+      // History - More storytelling style
+      "history": "History's basically humanity's greatest story! Ancient civilizations, wars, discoveries, inventions - it's all about how we got here. From cavemen to smartphones, it's been one wild ride. And the best part? We're still writing new chapters every day!",
+      "ancient history": "Ancient history? That's some epic stuff! Egyptians building pyramids, Greeks creating democracy, Romans ruling the world - these guys laid the foundation for everything we have today. Writing, laws, mathematics - so much of what we take for granted came from these ancient badasses.",
+      "world war": "World Wars? Man, that was some heavy stuff. WWI and WWII basically reshaped the entire world. Millions of people, new technologies, countries changing - it was intense. But out of all that chaos came the UN, modern medicine, and basically the world we live in today. Crazy how that works.",
+      "cold war": "The Cold War? Basically a 40-year staring contest between USA and USSR! Nuclear weapons, space race, proxy wars - the world was on the edge of its seat. Ended with the Soviet Union collapsing and America becoming the sole superpower. Pretty intense chapter in human history!",
+      "renaissance": "The Renaissance? Basically humanity's glow-up! Europe went from medieval times to modern civilization. Art, science, philosophy - everything exploded. Da Vinci, Michelangelo, Galileo - these guys were like the rockstars of their time. Changed everything!",
+      
+      // Geography - More conversational
+      "geography": "Geography's basically Earth's user manual! Mountains, oceans, countries, climates - it's how our planet is set up. Physical geography's the natural stuff, human geography's how we live on it. Pretty fascinating how it all works together!",
+      "continents": "Seven continents, man! Asia's massive with most people, Africa's got the most countries, Antarctica's basically a giant freezer. Each one's got its own vibe, culture, and awesome stuff to see. We live on a pretty diverse planet!",
+      "oceans": "Oceans cover 71% of Earth! Pacific's the biggest and deepest, Atlantic's second-biggest. They regulate our climate, provide food, and most of our oxygen comes from ocean plants. We basically live on a water planet - pretty wild when you think about it!",
+      "countries": "195 countries, each with its own story! Russia's huge, China's got billions of people, some countries are tiny islands. Different governments, cultures, food - it's like 195 different worlds all on one planet. Pretty amazing diversity!",
+      "climate": "Climate's basically Earth's weather personality! Some places are hot year-round, some get all four seasons. But climate change's messing with everything - rising temps, crazy weather, melting ice caps. We've got to get this under control, man!",
+      
+      // Current Affairs - More urgent and engaging
+      "current affairs": "Current affairs? Man, there's always something wild happening! Climate change, AI taking over, space exploration, crazy politics - we're living in interesting times. Renewable energy, global economy, pandemics - it's all connected. Pretty intense but also exciting times to be alive!",
+      "climate change": "Climate change's basically Earth running a fever! We're pumping too much CO2 into the atmosphere, temperatures are rising, ice is melting, weather's getting crazy. But hey, we're finally taking it seriously with renewable energy and electric cars. Gotta fix this mess!",
+      "renewable energy": "Renewable energy's basically Earth-friendly power! Solar, wind, water, geothermal - stuff that won't run out. It's getting cheaper than fossil fuels and doesn't mess up the climate. Win-win, right? We're basically building a cleaner future!",
+      "global economy": "Global economy's basically everyone trading with everyone! Countries making stuff, selling it worldwide, money flowing everywhere. USA, China, Europe - they're all connected. But it's created wealth inequality and environmental issues. We need to fix this system!",
+      "space exploration": "Space exploration's literally humanity reaching for the stars! Moon landing, Mars rovers, space stations - we're exploring the final frontier. Soon we'll have Mars colonies and asteroid mining. How cool is that? We're basically becoming a space-faring species!",
+      
+      // Arts & Culture
+      "arts": "Arts include visual arts (painting, sculpture), performing arts (music, dance, theater), literature, and digital arts. Art expresses human creativity, emotion, and culture. Major movements include Renaissance, Baroque, Impressionism, Modernism, and Contemporary art. Arts enrich human experience and preserve cultural heritage.",
+      "music": "Music is organized sound with rhythm, melody, and harmony. Genres include classical, jazz, rock, pop, hip-hop, electronic, and traditional music from various cultures. Music expresses emotion, tells stories, and unites people across cultures. Modern technology has transformed music creation, distribution, and consumption.",
+      "literature": "Literature includes written works like poetry, novels, plays, and essays. Major periods include Classical, Medieval, Renaissance, Romantic, Modern, and Contemporary literature. Literature preserves culture, explores human experience, and develops language and critical thinking skills.",
+      "sports": "Sports involve physical competition and skill. Popular sports include football (soccer), cricket, basketball, tennis, athletics, and swimming. Major events include Olympics, World Cup, and professional leagues. Sports promote health, teamwork, and international understanding through competition.",
+      
+      // Health & Medicine
+      "health": "Health is physical, mental, and social well-being. Key aspects include nutrition, exercise, sleep, stress management, and preventive care. Modern medicine has dramatically increased life expectancy through vaccines, antibiotics, surgery, and treatments for diseases. Public health focuses on population health and disease prevention.",
+      "medicine": "Medicine diagnoses, treats, and prevents disease. Major fields include internal medicine, surgery, pediatrics, psychiatry, and public health. Modern advances include antibiotics, vaccines, imaging (X-rays, MRI), genetics, and personalized medicine. Medical technology continues to revolutionize healthcare and extend human life.",
+      "nutrition": "Nutrition is the science of food and its effects on health. Essential nutrients include proteins, carbohydrates, fats, vitamins, minerals, and water. Balanced nutrition prevents diseases like obesity, diabetes, and heart disease. Different life stages require different nutritional needs for optimal health and development.",
+      "exercise": "Exercise is physical activity that improves health and fitness. Benefits include stronger muscles and bones, better cardiovascular health, weight management, stress reduction, and improved mental health. Recommended exercise includes aerobic activity, strength training, and flexibility exercises for optimal health benefits.",
+      
+      // Business & Economics
+      "business": "Business involves producing and selling goods or services. Key areas include management, marketing, finance, operations, and entrepreneurship. Successful businesses create value, solve problems, and generate economic growth. Modern business increasingly focuses on sustainability, social responsibility, and digital transformation.",
+      "economics": "Economics studies production, distribution, and consumption of goods and services. Microeconomics examines individual behavior and markets; macroeconomics studies national economies. Key concepts include supply and demand, inflation, unemployment, GDP, and international trade. Economic policies affect prosperity and stability.",
+      "entrepreneurship": "Entrepreneurship is creating and managing new businesses. Entrepreneurs identify opportunities, take risks, innovate, and create jobs. Successful entrepreneurship requires creativity, business knowledge, leadership, and perseverance. Startups and small businesses drive economic growth and technological innovation.",
+      "finance": "Finance manages money, investments, and financial systems. It includes personal finance (budgeting, saving), corporate finance (funding operations), and public finance (government budgets). Financial markets facilitate investment and economic growth. Modern finance uses technology for trading, banking, and financial services.",
+      
+      // Education & Learning
+      "education": "Education is systematic teaching and learning. Levels include primary, secondary, higher education, and lifelong learning. Quality education develops critical thinking, knowledge, and skills for personal and professional success. Modern education increasingly uses technology, personalized learning, and focuses on creativity and problem-solving.",
+      "learning": "Learning is acquiring knowledge, skills, and behaviors. It occurs through formal education, experience, observation, and practice. Effective learning strategies include active learning, spaced repetition, and connecting new information to existing knowledge. Lifelong learning is essential in our rapidly changing world.",
+      "languages": "Languages are systems of communication using sounds, symbols, and gestures. There are 7,000+ languages worldwide, with major ones including English, Mandarin Chinese, Spanish, Hindi, Arabic, and French. Languages preserve culture, enable communication, and shape how we think and perceive the world.",
+      
+      // Philosophy & Psychology
+      "philosophy": "Philosophy studies fundamental questions about existence, knowledge, values, reason, and reality. Major branches include metaphysics (reality), epistemology (knowledge), ethics (morality), logic, and aesthetics. Philosophy develops critical thinking and examines life's big questions.",
+      "psychology": "Psychology studies mind and behavior. It includes cognitive psychology (thinking), social psychology (group behavior), developmental psychology (lifespan), clinical psychology (mental health), and neuroscience. Psychology helps understand human behavior, improve mental health, and enhance well-being.",
+      "ethics": "Ethics studies moral principles and values. It examines what is right and wrong, just and unjust. Major ethical frameworks include utilitarianism (greatest good), deontology (duty-based), virtue ethics (character), and care ethics. Ethics guides personal decisions, professional conduct, and public policy.",
+      
+      // Environment & Nature
+      "environment": "Environment includes all living and non-living things affecting life on Earth. It includes ecosystems, biodiversity, climate, and natural resources. Environmental protection addresses pollution, habitat destruction, climate change, and species extinction. Sustainable development balances human needs with environmental preservation.",
+      "biodiversity": "Biodiversity is the variety of life on Earth at genetic, species, and ecosystem levels. It provides ecosystem services like pollination, water purification, and climate regulation. Threats include habitat loss, pollution, climate change, and invasive species. Conservation protects biodiversity for future generations.",
+      "ecosystem": "Ecosystems are communities of living organisms interacting with their environment. They include forests, oceans, deserts, wetlands, and cities. Each ecosystem has unique species, energy flows, and nutrient cycles. Human activities impact ecosystems, requiring conservation and sustainable management.",
+      "sustainability": "Sustainability meets present needs without compromising future generations' ability to meet their needs. It includes environmental protection, social equity, and economic viability. Sustainable practices include renewable energy, conservation, recycling, and responsible consumption to ensure long-term planetary health.",
+      
+      // Technology Deep Dives
+      "programming": "Programming is writing instructions for computers. Popular languages include Python (versatile, easy to learn), JavaScript (web development), Java (enterprise), C++ (systems), and SQL (databases). Programming powers software, websites, apps, AI, and virtually all modern technology. Learning programming develops problem-solving and logical thinking skills.",
+      "software development": "Software development creates applications and systems. It includes requirements analysis, design, coding, testing, and maintenance. Methodologies include Agile, Scrum, and DevOps. Modern development uses cloud computing, microservices, and continuous integration/continuous deployment (CI/CD) for rapid, reliable software delivery.",
+      "cybersecurity": "Cybersecurity protects digital systems from threats. It includes network security, data protection, encryption, ethical hacking, and security awareness. Cybersecurity is crucial as digital transformation increases vulnerability to attacks, data breaches, and cybercrime. Careers include security analysts, ethical hackers, and security engineers.",
+      "blockchain": "Blockchain is distributed ledger technology storing transactions across multiple computers. It enables cryptocurrencies like Bitcoin, smart contracts, and decentralized applications. Blockchain provides transparency, security, and eliminates intermediaries in finance, supply chains, and digital identity verification.",
+      "quantum computing": "Quantum computing uses quantum mechanics for processing. Unlike classical bits (0 or 1), quantum bits (qubits) can exist in multiple states simultaneously. Quantum computers could solve complex problems in cryptography, drug discovery, and optimization that are impossible for classical computers.",
+      
+      // Future & Innovation
+      "future": "The future will be shaped by AI, biotechnology, space exploration, renewable energy, and connectivity. Expected developments include autonomous vehicles, brain-computer interfaces, personalized medicine, sustainable cities, and quantum computing. Addressing challenges like climate change and inequality will require innovation and global cooperation.",
+      "innovation": "Innovation creates new ideas, methods, or products. It drives progress through creativity, research, and implementation. Major innovations include the internet, smartphones, renewable energy, and AI. Innovation ecosystems combine education, research, investment, and entrepreneurship to solve problems and create value.",
+      "automation": "Automation uses technology to perform tasks with minimal human intervention. It includes manufacturing robots, software automation, AI decision-making, and autonomous systems. Automation increases efficiency but raises questions about employment, skills training, and economic transition in an increasingly automated world.",
+      "robotics": "Robotics designs, builds, and operates robots. Applications include manufacturing, healthcare (surgery), agriculture, space exploration, and consumer products. Advanced robots use AI for perception, decision-making, and adaptation. Future robotics may transform transportation, elderly care, and daily life.",
+      
+      // Quick Facts & Trivia
+      "fact": "Here's an interesting fact: The human brain contains about 86 billion neurons, each connected to thousands of others, creating more possible connections than there are atoms in the universe!",
+      "trivia": "Fun trivia: Honey never spoils! Archaeologists have found 3000-year-old honey in Egyptian tombs that was still perfectly edible. Ask me for more fascinating facts!",
+      "amazing": "Amazing fact: A single bolt of lightning contains enough energy to toast 100,000 slices of bread. Nature's power is incredible!",
+      "interesting": "Interesting fact: Octopuses have three hearts, blue blood, and are incredibly intelligent - they can solve puzzles, use tools, and even recognize individual humans!",
+      
+      // Help & Navigation
+      "help": "I can help you with: 1) Information about Suhail's skills, projects, and experience 2) General knowledge on science, history, geography, technology, and more 3) Current affairs and important topics 4) Quick facts and interesting trivia 5) Learning about various subjects. Just ask me anything!",
+      "what can you do": "I can discuss Suhail's professional portfolio (Python development, ML, web development), answer general knowledge questions across all subjects, explain complex topics simply, provide current information, share interesting facts, and help with learning. I'm continuously expanding my knowledge base!",
+      "how to use": "Simply type your question or topic! For example: 'Tell me about Suhail's Python skills' or 'Explain black holes' or 'What caused World War I?' I'll provide detailed, helpful responses. You can also ask for recommendations on what to learn about next!"
     };
 
     // Modal Functions
@@ -3604,6 +4072,129 @@ self.addEventListener('activate', event => {
       }
     });
 
+    // Enhanced Chat Functions with Intelligent Matching
+    let conversationHistory = [];
+    let learningData = {};
+
+    // Fuzzy string matching for better response accuracy
+    function fuzzyMatch(input, keywords) {
+      const inputLower = input.toLowerCase();
+      let bestMatch = null;
+      let bestScore = 0;
+
+      for (const keyword of keywords) {
+        if (keyword === 'default') continue;
+        
+        // Exact match gets highest score
+        if (inputLower === keyword) {
+          return { keyword, score: 1.0 };
+        }
+        
+        // Contains match
+        if (inputLower.includes(keyword)) {
+          const score = keyword.length / inputLower.length;
+          if (score > bestScore) {
+            bestMatch = keyword;
+            bestScore = score;
+          }
+        }
+        
+        // Partial match with Levenshtein distance approximation
+        const distance = levenshteinDistance(inputLower, keyword);
+        const maxLength = Math.max(inputLower.length, keyword.length);
+        const similarity = 1 - (distance / maxLength);
+        
+        if (similarity > bestScore && similarity > 0.6) {
+          bestMatch = keyword;
+          bestScore = similarity;
+        }
+      }
+
+      return bestMatch ? { keyword: bestMatch, score: bestScore } : null;
+    }
+
+    // Simple Levenshtein distance implementation
+    function levenshteinDistance(str1, str2) {
+      const matrix = [];
+      for (let i = 0; i <= str2.length; i++) {
+        matrix[i] = [i];
+      }
+      for (let j = 0; j <= str1.length; j++) {
+        matrix[0][j] = j;
+      }
+      for (let i = 1; i <= str2.length; i++) {
+        for (let j = 1; j <= str1.length; j++) {
+          if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+            matrix[i][j] = matrix[i - 1][j - 1];
+          } else {
+            matrix[i][j] = Math.min(
+              matrix[i - 1][j - 1] + 1,
+              matrix[i][j - 1] + 1,
+              matrix[i - 1][j] + 1
+            );
+          }
+        }
+      }
+      return matrix[str2.length][str1.length];
+    }
+
+    // Context-aware response generation
+    function getContextualResponse(input, match) {
+      const context = conversationHistory.slice(-3); // Last 3 messages for context
+      const inputLower = input.toLowerCase();
+      
+      // Check for follow-up questions
+      if (context.length > 0) {
+        const lastBotMessage = context[context.length - 1]?.content?.toLowerCase() || '';
+        
+        if (inputLower.includes('more') || inputLower.includes('tell me more') || inputLower.includes('explain')) {
+          return expandOnLastTopic(lastBotMessage);
+        }
+        
+        if (inputLower.includes('what about') || inputLower.includes('how about')) {
+          return provideRelatedTopic(match.keyword);
+        }
+      }
+      
+      return chatbotKnowledge[match.keyword];
+    }
+
+    // Expand on previous topic - More personality and enthusiasm
+    function expandOnLastTopic(lastMessage) {
+      if (lastMessage.includes('python')) {
+        return "Let me expand on Python: Suhail's not just coding - he's crafting digital masterpieces! The guy uses advanced Python features like decorators, generators, context managers, and async/await like a boss. He's mastered Python's standard library and ecosystem - virtual environments, pip package management, testing with pytest. Python's readability and extensive libraries make it his weapon of choice for rapid development. Seriously impressive stuff!";
+      }
+      if (lastMessage.includes('machine learning')) {
+        return "More on ML: Dude, Suhail's ML workflow is next-level! Data preprocessing with Pandas (cleaning messy data like a pro), feature engineering (making data smarter), model selection (picking the right algorithm), hyperparameter tuning (fine-tuning to perfection), and deployment (making models work in real world). He understands the math behind linear regression, decision trees, random forests, neural networks - you name it. The guy's basically a machine learning wizard!";
+      }
+      if (lastMessage.includes('science')) {
+        return "Science keeps getting crazier! Recent breakthroughs are blowing minds - CRISPR gene editing (like playing God with DNA), quantum computing (computers that break reality's rules), AI discoveries (machines getting smarter than us), and space exploration achievements (humanity reaching for stars). The scientific method - observe, hypothesize, experiment, conclude - still remains our best tool for understanding this wild universe. We're living in sci-fi times, man!";
+      }
+      if (lastMessage.includes('flask')) {
+        return "More on Flask: Suhail's Flask skills are seriously next-level! The guy builds microservices that communicate like a well-oiled machine, APIs that are faster than lightning, and web applications that scale like crazy. He uses Flask-RESTful for clean API design, Flask-JWT for security that's rock-solid, SQLAlchemy for database magic, and Jinja2 for templates that look amazing. When it comes to Flask, Suhail's basically a ninja!";
+      }
+      return "I'd be stoked to expand more, dude! Just tell me which specific aspect you're curious about and I'll dive deep into it. Whether it's technical details, real-world applications, or just cool facts - I've got your back!";
+    }
+
+    // Provide related topics - More casual and engaging
+    function provideRelatedTopic(currentTopic) {
+      const relatedTopics = {
+        'python': ['Django', 'Flask', 'Machine Learning', 'Data Science', 'Automation'],
+        'machine learning': ['TensorFlow', 'Python', 'Data Science', 'AI', 'Neural Networks'],
+        'science': ['Physics', 'Chemistry', 'Biology', 'Technology', 'Space'],
+        'history': ['Ancient History', 'World War', 'Renaissance', 'Civilizations'],
+        'technology': ['AI', 'Programming', 'Internet', 'Computers', 'Innovation'],
+        'flask': ['Python', 'API Development', 'Web Development', 'Microservices'],
+        'django': ['Python', 'Web Development', 'Databases', 'Full Stack'],
+        'projects': ['License', 'Fuel', 'Skin', 'Impact'],
+        'skills': ['Python', 'Machine Learning', 'Flask', 'Web Development']
+      };
+
+      const topics = relatedTopics[currentTopic] || ['Skills', 'Projects', 'Experience', 'Contact'];
+      const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+      return chatbotKnowledge[randomTopic] || chatbotKnowledge.default;
+    }
+
     function sendMessage() {
       const input = document.getElementById('chatInput');
       const message = input.value.trim();
@@ -3611,44 +4202,139 @@ self.addEventListener('activate', event => {
 
       const messagesContainer = document.getElementById('chatMessages');
 
-      // User Message
+      // User Message with enhanced animation
       const userMsgDiv = document.createElement('div');
-      userMsgDiv.className = 'chat-message user';
+      userMsgDiv.className = 'chat-message user typing';
       userMsgDiv.innerHTML = `<div class="chat-avatar" aria-hidden="true">You</div><div class="chat-message-content">${escapeHtml(message)}</div>`;
       messagesContainer.appendChild(userMsgDiv);
+
+      // Add to conversation history
+      conversationHistory.push({ type: 'user', content: message });
 
       input.value = '';
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-      // Typing Indicator
+      // Enhanced Typing Indicator with animation
       const typingDiv = document.createElement('div');
-      typingDiv.className = 'chat-message bot typing-indicator';
-      typingDiv.innerHTML = `<div class="chat-avatar" aria-hidden="true">AI</div><div class="chat-message-content">...</div>`;
+      typingDiv.className = 'chat-message bot typing-indicator typing';
+      typingDiv.innerHTML = `<div class="chat-avatar pulse" aria-hidden="true">AI</div><div class="chat-message-content"><span class="typing-dots">●</span><span class="typing-dots">●</span><span class="typing-dots">●</span></div>`;
       messagesContainer.appendChild(typingDiv);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-      // Determine Response
-      const lowerMsg = message.toLowerCase();
-      let responseText = chatbotKnowledge.default;
-
-      // Check for keyword matches
-      for (const key in chatbotKnowledge) {
-        if (key !== 'default' && lowerMsg.includes(key)) {
-          responseText = chatbotKnowledge[key];
-          break;
-        }
+      // Intelligent Response Matching
+      const keywords = Object.keys(chatbotKnowledge);
+      const match = fuzzyMatch(message, keywords);
+      
+      let responseText;
+      if (match && match.score > 0.6) {
+        responseText = getContextualResponse(message, match);
+      } else {
+        // Try to provide helpful suggestions
+        responseText = generateHelpfulResponse(message);
       }
 
-      // Simulate delay for realism
+      // Learn from user interactions
+      if (!match || match.score <= 0.6) {
+        updateLearningData(message);
+      }
+
+      // Simulate realistic delay with variation
+      const delay = 800 + Math.random() * 600 + (responseText.length * 10);
+      
       setTimeout(function() {
         messagesContainer.removeChild(typingDiv);
 
         const botMsgDiv = document.createElement('div');
-        botMsgDiv.className = 'chat-message bot';
-        botMsgDiv.innerHTML = `<div class="chat-avatar" aria-hidden="true">AI</div><div class="chat-message-content">${escapeHtml(responseText)}</div>`;
+        botMsgDiv.className = 'chat-message bot typing new-message';
+        
+        // Create typing effect for bot message
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'chat-message-content typing-text';
+        contentDiv.textContent = responseText;
+        
+        botMsgDiv.innerHTML = `<div class="chat-avatar pulse" aria-hidden="true">AI</div>`;
+        botMsgDiv.appendChild(contentDiv);
         messagesContainer.appendChild(botMsgDiv);
+        
+        // Trigger typing animation
+        setTimeout(() => {
+          contentDiv.style.animation = 'none';
+          contentDiv.style.overflow = 'visible';
+        }, 2000);
+        
+        // Add to conversation history
+        conversationHistory.push({ type: 'bot', content: responseText });
+        
+        // Keep history manageable
+        if (conversationHistory.length > 10) {
+          conversationHistory = conversationHistory.slice(-8);
+        }
+        
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }, 800 + Math.random() * 400);
+      }, delay);
+    }
+
+    // Generate helpful responses for unmatched queries - More personality
+    function generateHelpfulResponse(input) {
+      const inputLower = input.toLowerCase();
+      
+      if (inputLower.includes('who') || inputLower.includes('what')) {
+        return "Curious about people or concepts, huh? I love explaining stuff! Try asking 'Who is Suhail?' or 'What makes Python so awesome?' or 'What's the deal with machine learning?' I'll break it down like we're just chilling and talking tech!";
+      }
+      
+      if (inputLower.includes('how') || inputLower.includes('why')) {
+        return "How things work? That's my jam! I enjoy breaking down complex stuff into simple terms. Try asking 'How does machine learning actually work?' or 'Why is Python so popular?' or 'How do I contact Suhail for an awesome project?' Let's dive deep!";
+      }
+      
+      if (inputLower.includes('where') || inputLower.includes('when')) {
+        return "Looking for locations or timing, I got you! Whether it's 'Where's Suhail located?' (Kerala, India - beautiful place!) or 'When was Python created?' (1991 - ancient in tech years!), I'm your guy for spatial and temporal questions!";
+      }
+      
+      if (inputLower.includes('can') || inputLower.includes('could')) {
+        return "Wondering about possibilities? I love that mindset! I can definitely help with Suhail's portfolio info, explain tech concepts, share mind-blowing facts, or just chat about whatever interests you. What's on your mind, dude?";
+      }
+      
+      if (inputLower.includes('boring') || inputLower.includes('dull')) {
+        return "Boring? Never! Let me spice things up with some mind-blowing facts! Did you know Suhail can build a complete web application before most people finish their morning coffee? Or that there are more possible connections in your brain than atoms in the universe? What kind of interesting stuff you want to explore?";
+      }
+      
+      if (inputLower.includes('impressed') || inputLower.includes('amazing')) {
+        return "Right? Suhail's skills are pretty insane! The guy's like a Swiss Army knife for tech - Python, Flask, ML, databases, you name it. And the best part? He's always hungry to learn more and tackle bigger challenges. What aspect blows your mind the most?";
+      }
+      
+      return "Whoa, that's a deep cut! But hey, I'm always up for a challenge. Try asking about Suhail's insane Python skills, his ML projects that actually help people, or just shoot the breeze about science, tech, or whatever interests you. I'm basically your digital buddy for knowledge!";
+    }
+
+    // Update learning data
+    function updateLearningData(input) {
+      const key = input.toLowerCase();
+      learningData[key] = (learningData[key] || 0) + 1;
+    }
+
+    // Send suggestion function
+    function sendSuggestion(suggestion) {
+      document.getElementById('chatInput').value = suggestion;
+      sendMessage();
+      
+      // Hide suggestions after first interaction
+      const suggestionsElement = document.getElementById('chatSuggestions');
+      if (suggestionsElement) {
+        suggestionsElement.style.display = 'none';
+      }
+    }
+
+    // Enhanced toggle chat with suggestions management
+    function toggleChat() {
+      const chatWindow = document.getElementById('chatWindow');
+      const chatToggle = document.querySelector('.chat-toggle');
+      const isActive = chatWindow.classList.toggle('active');
+      
+      chatToggle.classList.toggle('active');
+      chatToggle.setAttribute('aria-expanded', isActive);
+      
+      if (isActive) {
+        document.getElementById('chatInput').focus();
+      }
     }
 
     function escapeHtml(text) {
