@@ -69,6 +69,16 @@
       color: var(--text);
       overflow-x: hidden;
       line-height: 1.7;
+      min-height: 100vh;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    /* Ensure proper alignment during browser zoom */
+    @media screen {
+      body {
+        transform-origin: top center;
+      }
     }
 
     /* Focus styles for accessibility */
@@ -1426,7 +1436,7 @@
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Loading Animation */
+    /* Enhanced Loading Animation */
     .loader {
       position: fixed;
       top: 0;
@@ -1439,6 +1449,18 @@
       justify-content: center;
       z-index: 9999;
       transition: opacity 0.5s, visibility 0.5s;
+      overflow: hidden;
+    }
+
+    .loader::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+      animation: shimmer-bg 2s linear infinite;
     }
 
     .loader.hidden {
@@ -1446,18 +1468,127 @@
       visibility: hidden;
     }
 
-    .loader-spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid var(--border);
-      border-top: 3px solid var(--primary);
+    .loader-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .loader-logo {
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: logoFloat 3s ease-in-out infinite;
+      box-shadow: 0 10px 40px rgba(56, 189, 248, 0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .loader-spinner {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      animation: spinnerRotate 2s linear infinite;
+    }
+
+    .loader-spinner::before,
+    .loader-spinner::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 3px solid transparent;
+    }
+
+    .loader-spinner::before {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-top-color: var(--primary);
+      border-right-color: var(--secondary);
       animation: spin 1s linear infinite;
     }
+
+    .loader-spinner::after {
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      border-bottom-color: var(--accent);
+      border-left-color: var(--primary);
+      animation: spin 1.5s linear infinite reverse;
+    }
+
+    .loader-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: textPulse 2s ease-in-out infinite;
+    }
+
+    .loader-dots {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .loader-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      animation: dotBounce 1.4s ease-in-out infinite;
+    }
+
+    .loader-dot:nth-child(1) { animation-delay: 0s; }
+    .loader-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loader-dot:nth-child(3) { animation-delay: 0.4s; }
 
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    @keyframes spinnerRotate {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { 
+        transform: translateY(0px) scale(1);
+        box-shadow: 0 10px 40px rgba(56, 189, 248, 0.3);
+      }
+      50% { 
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 60px rgba(56, 189, 248, 0.5);
+      }
+    }
+
+    @keyframes textPulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes dotBounce {
+      0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+      }
+      40% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
     }
 
     /* Enhanced Card Effects */
@@ -3629,9 +3760,22 @@
 </head>
 
 <body>
-  <!-- Loading Screen -->
+  <!-- Enhanced Loading Screen -->
   <div class="loader" id="loader">
-    <div class="loader-spinner"></div>
+    <div class="loader-content">
+      <div class="loader-logo">
+        <img src="https://raw.githubusercontent.com/suhaaail777/suhaail/main/821222F0-9B83-4541-A11E-20BD36FFC858.jpeg" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" alt="Loading">
+      </div>
+      <div class="loader-spinner"></div>
+      <div class="loader-text">
+        Loading
+        <div class="loader-dots">
+          <div class="loader-dot"></div>
+          <div class="loader-dot"></div>
+          <div class="loader-dot"></div>
+        </div>
+      </div>
+    </div>
   </div>
   
   <!-- Scroll Progress Bar -->
@@ -5128,19 +5272,6 @@
     });
 
     // Chat Widget Functions
-    function toggleChat() {
-      const chatWindow = document.getElementById('chatWindow');
-      const chatToggle = document.querySelector('.chat-toggle');
-      const isActive = chatWindow.classList.toggle('active');
-      
-      chatToggle.classList.toggle('active');
-      chatToggle.setAttribute('aria-expanded', isActive);
-      
-      if (isActive) {
-        document.getElementById('chatInput').focus();
-      }
-    }
-
     // Enter key support for chat
     document.getElementById('chatInput').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
@@ -5278,6 +5409,10 @@
 
       const messagesContainer = document.getElementById('chatMessages');
 
+      // Add sending animation to input
+      input.style.animation = 'pulse 0.3s ease-out';
+      setTimeout(() => input.style.animation = '', 300);
+
       // User Message with enhanced animation
       const userMsgDiv = document.createElement('div');
       userMsgDiv.className = 'chat-message user typing';
@@ -5297,11 +5432,14 @@
       messagesContainer.appendChild(typingDiv);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-      // Intelligent Response Matching
-      const keywords = Object.keys(chatbotKnowledge);
-      const match = fuzzyMatch(message, keywords);
-      
-      let responseText;
+      // Simulate thinking time with variable delay
+      const thinkingTime = Math.random() * 1000 + 800; // 800-1800ms
+      setTimeout(() => {
+        // Intelligent Response Matching
+        const keywords = Object.keys(chatbotKnowledge);
+        const match = fuzzyMatch(message, keywords);
+        
+        let responseText;
       if (match && match.score > 0.6) {
         responseText = getContextualResponse(message, match);
       } else {
@@ -5323,10 +5461,14 @@
         const botMsgDiv = document.createElement('div');
         botMsgDiv.className = 'chat-message bot typing new-message';
         
-        // Create typing effect for bot message
+        // Create typing effect for bot message with proper line breaks
         const contentDiv = document.createElement('div');
-        contentDiv.className = 'chat-message-content typing-text';
-        contentDiv.textContent = responseText;
+        contentDiv.className = 'chat-message-content';
+        
+        // Split response into sentences and add line breaks
+        const sentences = responseText.match(/[^.!?]+[.!?]+/g) || [responseText];
+        const formattedText = sentences.join('<br><br>');
+        contentDiv.innerHTML = formattedText;
         
         botMsgDiv.innerHTML = `<div class="chat-avatar pulse" aria-hidden="true">AI</div>`;
         botMsgDiv.appendChild(contentDiv);
@@ -5348,6 +5490,7 @@
         
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
       }, delay);
+      }, thinkingTime);
     }
 
     // Generate helpful responses for unmatched queries - More personality
@@ -5408,10 +5551,84 @@
       chatToggle.classList.toggle('active');
       chatToggle.setAttribute('aria-expanded', isActive);
       
+      // Add smooth animation
       if (isActive) {
+        chatWindow.style.animation = 'chatSlideIn 0.3s ease-out';
         document.getElementById('chatInput').focus();
+        
+        // Add pulse effect to toggle button
+        chatToggle.style.animation = 'pulse 0.5s ease-out';
+      } else {
+        chatWindow.style.animation = 'chatSlideOut 0.3s ease-in';
       }
     }
+
+    // Enhanced chat animations
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes chatSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      @keyframes chatSlideOut {
+        from {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(20px) scale(0.9);
+        }
+      }
+      
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+      
+      .chat-window {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .chat-window.active {
+        animation: chatSlideIn 0.3s ease-out;
+      }
+      
+      .chat-toggle {
+        transition: all 0.3s ease;
+      }
+      
+      .chat-toggle:hover {
+        transform: scale(1.1) rotate(5deg);
+      }
+      
+      .chat-toggle.active {
+        animation: pulse 0.5s ease-out;
+      }
+      
+      .suggestion-chip {
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+      
+      .suggestion-chip:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+      }
+      
+      .suggestion-chip:active {
+        transform: translateY(0) scale(0.98);
+      }
+    `;
+    document.head.appendChild(style);
 
     function escapeHtml(text) {
       const div = document.createElement('div');
