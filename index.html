@@ -251,7 +251,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 10%;
+      padding: 0;
       position: relative;
       overflow: hidden;
     }
@@ -412,13 +412,12 @@
 
     .hero-content {
       text-align: center;
-      max-width: 800px;
       z-index: 1;
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      width: 100%;
     }
 
     .hero-badge {
@@ -3784,20 +3783,7 @@
   <!-- Cursor Glow Effect -->
   <div class="cursor-glow" id="cursorGlow"></div>
   
-  <!-- Sound Effects -->
-  <audio id="hoverSound" preload="auto">
-    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE" type="audio/wav">
-  </audio>
-  <audio id="clickSound" preload="auto">
-    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE" type="audio/wav">
-  </audio>
-  <audio id="scrollSound" preload="auto">
-    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE" type="audio/wav">
-  </audio>
-  <audio id="typingSound" preload="auto">
-    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZURE" type="audio/wav">
-  </audio>
-  
+    
   <a href="#main-content" class="skip-link">Skip to main content</a>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   
@@ -3827,7 +3813,7 @@
   
     
   <main id="main-content">
-    <section class="hero" aria-label="Introduction">
+    <section class="hero" id="home" aria-label="Introduction">
       <div class="hero-bg" aria-hidden="true">
         <div class="hero-gradient g1"></div>
         <div class="hero-gradient g2"></div>
@@ -4485,99 +4471,22 @@
     window.addEventListener('load', function() {
       setTimeout(function() {
         document.getElementById('loader').classList.add('hidden');
-      }, 800);
-    });
-
-    // Sound Effects System
-    class SoundEffects {
-      constructor() {
-        this.enabled = true;
-        this.sounds = {
-          hover: document.getElementById('hoverSound'),
-          click: document.getElementById('clickSound'),
-          scroll: document.getElementById('scrollSound'),
-          typing: document.getElementById('typingSound')
-        };
-        this.lastScrollTime = 0;
-        this.scrollThrottle = 100; // milliseconds between scroll sounds
-        this.init();
-      }
-
-      init() {
-        // Set volume for all sounds
-        Object.values(this.sounds).forEach(sound => {
-          if (sound) sound.volume = 0.3;
-        });
-
-        // Add hover effects to interactive elements
-        this.addHoverSounds();
-        this.addClickSounds();
-        this.addScrollSounds();
-        this.addTypingSounds();
-      }
-
-      playSound(soundName) {
-        if (!this.enabled || !this.sounds[soundName]) return;
         
-        const sound = this.sounds[soundName];
-        sound.currentTime = 0;
-        sound.play().catch(e => console.log('Sound play failed:', e));
-      }
-
-      addHoverSounds() {
-        const hoverElements = document.querySelectorAll('.skill-card, .project-card, .experience-card, .nav-links a, .btn, .contact-method, figma-button');
-        hoverElements.forEach(element => {
-          element.addEventListener('mouseenter', () => this.playSound('hover'));
-        });
-      }
-
-      addClickSounds() {
-        const clickElements = document.querySelectorAll('.skill-card, .project-card, .experience-card, .nav-links a, .btn, .contact-method, figma-button, .mobile-menu-btn');
-        clickElements.forEach(element => {
-          element.addEventListener('click', () => this.playSound('click'));
-        });
-      }
-
-      addScrollSounds() {
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-          const now = Date.now();
-          if (now - this.lastScrollTime > this.scrollThrottle) {
-            this.playSound('scroll');
-            this.lastScrollTime = now;
-          }
+        // Ensure proper scroll to Home section after loader disappears
+        setTimeout(function() {
+          // First scroll to top to ensure we're at the right position
+          window.scrollTo(0, 0);
           
-          // Clear existing timeout
-          clearTimeout(scrollTimeout);
-          // Set new timeout to stop scroll sound after scrolling stops
-          scrollTimeout = setTimeout(() => {
-            this.lastScrollTime = 0;
-          }, 150);
-        });
-      }
-
-      addTypingSounds() {
-        const inputElements = document.querySelectorAll('input, textarea');
-        inputElements.forEach(element => {
-          element.addEventListener('keypress', () => this.playSound('typing'));
-        });
-      }
-
-      toggle() {
-        this.enabled = !this.enabled;
-        return this.enabled;
-      }
-    }
-
-    // Initialize sound effects
-    const soundEffects = new SoundEffects();
-
-    // Add keyboard shortcut to toggle sounds (Press 'S' key)
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 's' || e.key === 'S') {
-        const enabled = soundEffects.toggle();
-        console.log(`Sound effects ${enabled ? 'enabled' : 'disabled'}`);
-      }
+          // Then scroll to home section with smooth behavior
+          const homeSection = document.getElementById('home');
+          if (homeSection) {
+            homeSection.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }, 100);
+      }, 800);
     });
 
     // Scroll Progress Bar
