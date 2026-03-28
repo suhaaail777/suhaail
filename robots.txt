@@ -2,15 +2,14 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://suhailp.me/sitemap.xml
+Sitemap: https://suhaaail777.github.io/suhaail/sitemap.xml
 
-# Allow search engines to crawl all content
-Allow: /
+# Allow specific important files
 Allow: /portfolio.html
 Allow: /manifest.json
 Allow: /sw.js
 
-# Block unnecessary files
+# Block unnecessary file types
 Disallow: /*.json$
 Disallow: /*.js$
 Disallow: /*.css$
